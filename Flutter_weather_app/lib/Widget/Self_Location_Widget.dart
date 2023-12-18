@@ -12,7 +12,7 @@ class WeatherService {
     final Map<String, String> parameters = {
       'lat': latitude.toString(),
       'lon': longitude.toString(),
-      'appid': '4088f34c07652a38e41e5271e2b702cd',
+      'appid': 'fdeeed8f12d6bdf41fcf5457285cb6c0',
       'units': 'metric', // You can change the units to 'imperial' for Fahrenheit
     };
 

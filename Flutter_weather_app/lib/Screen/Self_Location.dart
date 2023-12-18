@@ -11,6 +11,7 @@ class SelfLocation extends StatelessWidget {
       home: Scaffold(
         appBar: AppBar(
           title: Text('Weather App with Location'),
+          centerTitle: true,
         ),
         body: LocationWeatherWidget(weatherService),
       ),
@@ -88,24 +89,110 @@ class _LocationWeatherWidgetState extends State<LocationWeatherWidget> {
           if (weatherData != null)
             Column(
               children: [
-                Text('Date: ${_formatDate(currentTime)} ${_formatTime(currentTime)}'),
-                Text('Temperature: ${weatherData?['main']?['temp']}°C'),
-                Text('Humidity: ${weatherData?['main']?['humidity']}%'),
-                Text('Wind Speed: ${weatherData?['wind']?['speed']} m/s'),
-                Text('Max Temperature: ${weatherData?['main']?['temp_max']}°C'),
-                Text('Min Temperature: ${weatherData?['main']?['temp_min']}°C'),
+                Row(
+                  mainAxisSize: MainAxisSize.max,
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  children: [
+                    Text(
+                         '${_formatTime(currentTime)} ',
+                      style: const TextStyle(fontSize: 35,),
+                    ),
+                  ],
+                ),
+                Row(
+                  mainAxisSize: MainAxisSize.max,
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  children: [
+                    Text(
+                      ' ${_formatDate(currentTime)} ',
+                      style: const TextStyle(fontWeight: FontWeight.w700,),
+                    ),
+                  ],
+                ),
                 Container(
-                  height: MediaQuery.sizeOf(context).height * 0.20,
+                  height: MediaQuery.sizeOf(context).height * 0.08,
                   decoration: BoxDecoration(
                     image: DecorationImage(
                       image: NetworkImage(
-                        "http://openweathermap.org/img/wn/${weatherData?['weather']?[0]?['icon']}@2x.png",
+                        "http://openweathermap.org/img/wn/${weatherData?['weather']?[0]?['icon']}@4x.png",
                       ),
                     ),
                   ),
                 ),
-                Text(' ${weatherData?['weather']?[0]?['description']}'),
-
+                Row(
+                  mainAxisSize: MainAxisSize.max,
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  children: [
+                    Text(
+                      ' ${weatherData?['weather']?[0]?['description']}',
+                        style: const TextStyle(
+                        color: Colors.black,
+                        fontSize: 20,),
+                    ),
+                  ],
+                ),
+                  Text(
+                  ' ${weatherData?['main']?['temp']}°C',
+                  style: const TextStyle(
+                  color: Colors.black,
+                  fontSize: 50,
+                  fontWeight: FontWeight.w500,
+                  ),
+                  ),
+                Container(
+                  height: MediaQuery.sizeOf(context).height*0.15,
+                  width: MediaQuery.sizeOf(context).width*0.80,
+                  decoration: BoxDecoration(
+                    color: Colors.blueGrey,
+                    borderRadius: BorderRadius.circular(20),
+                  ),
+                  padding: const EdgeInsets.all(8.0),
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                    crossAxisAlignment: CrossAxisAlignment.center,
+                    children: [
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                        crossAxisAlignment: CrossAxisAlignment.center,
+                        children: [
+                          Text(
+                              'Humidity: ${weatherData?['main']?['humidity']}%',
+                              style: const TextStyle(
+                                color: Colors.white,
+                                fontSize: 15,)
+                          ),
+                          Text(
+                            'Wind Speed: ${weatherData?['wind']?['speed']} m/s',
+                            style: const TextStyle(
+                              color: Colors.white,
+                              fontSize: 15,),
+                          ),
+                        ],
+                      ),
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                        crossAxisAlignment: CrossAxisAlignment.center,
+                        children: [
+                          Text(
+                              'Max Temperature: ${weatherData?['main']?['temp_max']}°C',
+                              style: const TextStyle(
+                                color: Colors.white,
+                                fontSize: 15,)
+                          ),
+                          Text(
+                            'Min Temperature: ${weatherData?['main']?['temp_min']}°C',
+                            style: const TextStyle(
+                              color: Colors.white,
+                              fontSize: 15,),
+                          ),
+                        ],
+                      ),
+                    ],
+                  ),
+                ),
               ],
             ),
         ],
